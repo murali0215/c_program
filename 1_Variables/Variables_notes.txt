@@ -1,0 +1,167 @@
+) What are variables?
+Variables are memory locations associated with a name whose value can be changed. It can hold only one value at a time.
+
+
+2) Why variables?
+To get different outputs for different inputs.
+
+
+3) How to declare a variable?
+<datatype> <variablename>; // A-Z ,a-z, 0-9, _, no digit at start
+
+
+4) What is a datatype?
+Its a keyword that tells us about what kind of data we want to store, and how much size it requires in memory.
+
+
+5) How many data types are available?
+Primitive datatypes:
+i)int - whole numbers (-ve & +ve)
+ii)char - all symbols available on keyboard -
+iii)float - real numbers with 6 digit precision
+iv)double - real numbers with more digit precision than float
+          size of datatypes depends on compiler. char datatype size is always 1 byte.
+
+
+6) What are qualifiers?
+extra keywords to modify primitive datatype properties , like size and sign.
+i) size qualifiers: short , long
+ii) sign qualifiers: unsigned, signed .
+signed is default keyword. both size and sign qualifiers can be applied to a datatype at a time. There are certain rules on how to apply.
+
+
+7) How to apply qualifiers?
+- short and long are applicable on integer datatype.
+- long can be applied to double
+- signed & unsigned can be applied to only integer & character.
+- float & double are strictly signed. They cannot be unsigned.
+
+
+8) after applying the qualifiers, we get total 11 datatypes:
+we take 32 bit system as example for size.
+i) signed int - %d   - 4 bytes
+ii) unsigned int - %u  - 4 bytes
+iii) signed char - %c - 1 byte
+iv) unsigned char - %c - 1 byte
+v) short signed int - %hd - 2 bytes
+vi) short unsigned int - %hu - 2 bytes
+vii) long signed int - %ld - 8 bytes
+viii) long unsigned int - %lu - 8 bytes
+ix) float -%f - 4 bytes
+x) double - %lf - 8 bytes
+xi) long double - %LF - 16 bytes
+
+
+
+9) Variable declaration:
+<datatype> <var1>,<var2>,<var3>;
+compiler allocates memory location for those variables depending on datatype.
+
+
+10) every datatype has a predefined format specifier used for input and output purpose.
+
+
+
+11) sign qualifier does not modify size of a datatype. so unsigned and signed datatypes will have same size.
+
+
+
+12) How to put a value in a variable?
+there are 2 methods to write a value to a variable's memory location:
+i) Assignment : (=)
+we can assigne a value to a variable using assignment statement.
+eg., var = 5; // where to write = what to write
+ii) scanf statement
+scanf( "formatstring", &var1, &var2,...);
+scanf can take input for 1 or more variables in a single line.
+formatstring :  Has 2 parts
+1)format specifiers of each variable given in order of variables to read.
+2)skip characters: Characters you want to skip from input, can be specified directly in between format specifiers. They will not be taken and stored by scanf.
+eg., scanf("%d\n%c",&x,&c);
+the '\n' in between %d and %c will ensure that, any extra space, new line or tab entered by user after integer, is not taken as data for variable c. scanf will skip them and wait for user input for character instead.
+&var : Address of every variable to be given ,so that scanf can write the input value in its address.
+& : Address of Operator. Retrieves address of a variable.
+Variable value will not be modified in any other operations.
+scanf reads input from the place where previous scanf has stopped reading. Input is like a file(buffer) where all the excess input is kept like that for next scanf to read.
+Because of this, most of the times, character variables end up taking spaces or new lines as data. Inorder to ignore that new line or space characters, we can use a skip character in formatstring, before %c.
+or same can be achieved using getchar() function.getchar() eats up the extra space or newline character.
+
+
+
+13) You can modify the value of a variable in a program any number of times. At any point, variable's latest value is used.
+
+
+14) Output method : printf statement
+printf("formatstring",exp1,exp2,exp3...);
+printf can give more than 1 output value at a time in a single line.
+"formatstring" : has three parts
+i) static text : the characters we give without preceding with \ or %  are printed as it is.
+ii) format specifier: for every value you want to print in the putput, you need to provide a format specifier , which is replaced with the value at the time of printing. Every format specifier needs a expression to be given after formatstring, which is used to replace the value.
+iii)escape sequence: for formatting the output for better look. these characters are preceded with a '\'.
+'\n' - to print a new line
+'\t' - horizontal tab
+'\v' - vertical tab
+'\b' - back space ( moves one character left)
+'\r' - carriage return ( moves to beginning of line)
+'\f' - form feed (moves to beginning of next page - works with printers)
+'\a' - audible alert(depends on hardware)
+'\0' - null character( there is no visual representation)
+'\\' - prints a single \
+'\"' - prints "
+'\'' - prints ' ,used for character constants.
+expression: are evaluated and replaced in the corresponding format specifier. expression can  be a constant, a variable or a combination of constats, variables and operators.
+eg., 5 , a , a+b , a+1
+
+
+15) we must declare a variable before we use a variable.
+
+
+16) variable names must be unique.
+
+
+17) we need to put a value in a variable before using it.
+
+
+18) Symbols like +, -, * ,/ if used inside '', or "" , they work like character data. without any quotation marks, they work like operators.
+
+operators : they do some work and return some value.
+'+'  is a character constant
+"+"  is a string constant
++ is addition operator
+
+'a' is char constant
+a is identifier
+
+'{' is char constant
+{ is block open symbol
+
+
+
+19) character datatype: Is a special data type which has a symbolic representation on the front end, but stored as a number at the back end.
+The numbers are defined in the ascii table, every character is given an equivalent standard number in that table. Whenever we want to store a character as data, its ascii number is stored in memory.
+Whenever we want to retrieve the data, ascii number is converted to a symbol and printed.
+if we read a character using %c, symbol is printed. If we read same character using %d, ascii number is printed.
+compiler treats character data as integer ,internally.
+
+
+
+20) How to put a character value in a character variable?
+1) scanf using %c
+can enter characters directly, without single quotations
+getchar() is a function that reads a single character from input.
+char ch;
+ch = getchar(); // reads the character and stores in ch variable
+is equivalent to
+scanf("%c",&ch);
+2)assignment: need to assign a character with single quotations
+eg., char c;
+c = 'a';
+or can directly assign ascii number also,if we remember.
+c = 97; // same as c='a';
+
+
+
+21) To print % symbol in output, we need to print two % symbols.
+printf("%d %% %d = %d",a,b,a%b);//a value 3, b value 4
+will print 3 % 4 = 3
+
