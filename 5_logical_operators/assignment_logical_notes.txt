@@ -1,0 +1,193 @@
+Assignment Operators
+
+All are binary operators.
+=   +=    -=    *=    /=    %=    &=   |=   ^=   <<=    >>=
+
+Assignment syntax:
+L   = R
+L  +=  R // expansion of this is L = L + R
+
+L : lvalue - must be an expression associated with a memory location.
+eg., variables
+R : rvalue - any expression whose value we want to write to the L location. It can be a constant, variable or combination of constants, variables and operators or other expressions.
+
+If we use a non-memory location on left side, we will get "lvalue required" compilation error.
+eg.,   5 + x = y ; // error
+5 = y; // y = 5
+
+assignment expression can be used as part of another expression.
+x = y + (z = 6); // z = 6 returns z value as a result
+if(x = y) // logical error but works with compiler.should use ==
+
+if(x = y) // unnecessary if statement here, it changes x value to y
+ printf("%d",x);
+
+x = y; // above statement can be written like this instead
+if(x)
+printf("%d",x);
+L = R , assigns R value to L ,and returns L value.
+shorthand assignments are just a short form of combination of 2 operations. If both left and right are using same variable, then we can use shorthand assignment operator.
+eg., a &= b;
+same as a = a&b;
+
+
+
+
+Bitwise Operators:
+
+Work at the bit level. They all are applicable only on integral data types.
+Binary category: & , | , ^ , << , >>
+Unary : ~
+
+
+Bitwise &: Applies AND table on bits from both operands at each bit position, returns the decimal equivalent of the resultant bits.
+Bitwse | : Applies OR table
+Bitwise ^ : Applies Exclusive OR table.
+
+left shift <<: a << b , every bit in a, is shifted to left by b number of positions. From right side b number of zero bits are added, from extreme left end b number of bits are lost.
+
+right shift >>: a >> b, every bit in a, is shifted to right by b number of positions. From extreme left, b number of zero bits are added, from right end b number of bits are lost.
+complement : Unary ~ :
+~a  =>  -a - 1
+
+Increment or Decrement operators : Unary operators ( ++, --)
+
+Increment operator: Increases the value of the operand by 1.
+Decrement operator: Decreases the value of the operand by 1.
+
+Increment and Decrement operators internally have assignment operation. So all rules applicable on assignment operators are applicable to increment or decrement operators.
+We cannot modify without lvalue. So we can only use a lvalue for increment or decrement operations. lvalue means variable.
+
+They can be applied in 2 ways (post / pre)
+Pre Increment: ++x : Increases value of x by 1, and returns NEW value of x.
+Post Increment: x++ : Increases value of x by 1, and returns OLD value of x.
+Pre Decrement: --x : Decreases value of x by 1, and returns NEW value of x.
+Post Decrement: x--: Decreases value of x by 1,and returns OLD value of x.
+Pre / Post operators make increment or decrement on the operand same way, but difference will come to the expressions which use these expressions as operands, as their results are different.
+x++; //x = x+1;
+++x; // x = x+1;
+both have same effect on x. Here both statements are same as the return value is not used by other operators or expressions.
+Whenever they are part of another expression, there will be difference with pre & post.
+y = x++; // here y is assigned old value of x
+y = ++x; // y is assigned updated value of x
+
+printf("%d",x++);//old value of x printed
+printf("%d",++x);//new value of x is printed
+
+we should not use any expressions other than variables for inc/dec.
+eg., 5++ // lvalue error
+++(x+y) // lvalue error
+++x++ // lvalue error
+
+
+Logical Operators:
+
+Logical operators are operators used to combine multiple conditions into a single condition. Logical operators take input of multiple conditions and make them as one condition.
+Logical AND : && : Binary
+When you have multiple conditions to satisfy, for any one block to execute, then all multiple conditions can be combined using &&.
+Logical AND executes based on AND table. Returns a truth only if both inputs are true , otherwise false, even if one input is false.
+Executes from left to right.
+if left operand of && is false, then no need to execute right operand, as the result is going to be false only.
+
+Logical OR : ||: Binary
+When you have different conditions, based on any of which same output may come. If any one condition is true, logical OR will return a true. Returns a false only if all the conditions fail.
+Logical OR works based on OR table.
+Executes from left to right. If left operand is true, it wont execute right operand, as output is true only.
+
+so we have to be careful when we right the right side condition of logical && or logical || operators, as they are not always guaranteed to execute. Their execution depends on left operands. So we should not write any expressions that will modify any variable in these expressions.
+
+Logical Not : ! : Unary operator
+Negates the boolean value of the operand. You can use ! operator to negate the result of an existing condition, inorder to reverse the output.
+if(!10) - > false
+reverse of (a == b) => !(a==b)   or a != b
+
+
+Special Operators:
+
+i) sizeof() operator - returns the size requirement in bytes, of the given operand. It is returned as long unsigned integer, so need to print the value using %lu.
+sizeof used in 4 ways:
+1 ) sizeof(data type name) : returns the size of data type keyword given.
+eg., sizeof(long unsigned int)
+2 ) sizeof( variable / variable expression) : returns size of the variable, depending on its declaration, if a variable is supplied.
+
+3 ) sizeof(constant) : returns size of the constant, based on its assumption of the datatype of constant.
+for any constant, there is a pre-assumed datatype.
+eg., whole numbers are assumed to be integers
+real numbers are assumed to be double
+character constants are assumed to be int
+eg., char x = 'a';
+sizeof(x) will return 1 byte , but sizeof('a') will return 4.
+sizeof(3.14) will return double size.
+
+By using some suffixes we can change the datatype assumption of a constant:
+3.14 : by default double
+3.14f : is considered as float
+3.14L : long double
+3 : by default int
+3l : long int
+4) sizeof can be used with expression.
+If an expression is given to sizeof, it is not executed, but its data type is derived based on some predefined rules, and that data type size is returned.
+eg., sizeof(x++) // here x is not incremented. Only x++ expression datatype is guessed by sizeof based on some rules.
+
+
+Type casting:
+
+1 ) Implicit Typecasting
+2 ) Explicit Typecasting
+
+Implicit Typecasting :
+In any operation, if the operands are of different data types, it is not possible to execute the operation. So compiler converts them to same datatype, and gives the result.
+eg., Binary operators: If both operands are different datatypes, one of them is automatically converted to the other.
+The decision of which data type is converted to which data type,is made based on the following rules:
+1 ) whole number always converted to real numbers
+2 ) Small size always converted to big size
+3 ) signed always converted to unsigned
+
+Based on these rules, the implicit typecasting hierarchy looks like below(from ppt)
+If any 2 datatypes from this hierarchy are used in an operation, the bottom datatype is converted to the upper one, implicitly.
+However in assignment operation, right side is always converted to left side, irrespective of hierarchy.
+Based on these rules only, sizeof operator also can derive the datatype of the given expression. We can also decide the formatspecifier of an expression to print depending on these rules only.
+datatypes which are smaller than integer, are directly promoted to integer, which is called, Integer Promotion.
+eg., short int, converted to int
+char converted to int
+
+In a Ternary /Conditional operator, result depends on operand 1, but datatype of result will be one of operand 2 or 3, depending on which is on the top in hierarchy.
+
+
+
+
+Explicit Typecasting:
+
+Compiler will convert datatype automatically when different datatypes are applied in an operation. But when same datatypes used, but result has to be different datatype, then we have to use explicit typecasting, to force compiler to change the datatype.
+It is done using type casting operator: (<datatype>)
+It is unary operator. It changes the datatype of the operand and returns it as a result. But operand is not changed permanently.
+int a;
+convert integer a to float : (float)a
+
+
+
+
+Conditional Operator: It is a ternary operator, takes 3 operands, and 2 symbols : ?:
+syntax : op1 ? op2 : op3
+Executes from left to right.
+op1 is executed first, and based on its boolean value, either op2 or op3 are returned. op2 is returned if op1 is true. op3 is returned if op1 is false.
+Conditional operator can be used as an expression in other statements/expressions.
+operands of conditional operator can be any expressions, including printf or scanf statements. However, statements like if, else, switch, loops, or return or break...are not allowed in conditional expression. Conditional expression can be used inside these statements.
+Datatype of conditional expression ,depends on operand 2& 3 only.
+
+eg., Biggest of 2 can be written in different ways using ?:
+a>b ? printf("%d",a) : printf("%d",b);
+printf("%d",a>b?a:b);
+int c = a>b?a:b;
+printf("%d",c);
+
+Conditional operators can be nested. One conditional expression can be used as operand for another conditional expression.
+ 
+
+Comma Operator: ,
+Comma is a binary operator. Takes any expression as operands, executes them from left to right, and returns the right most expression value as result.
+comma normally  works like a seperator, in declarations and function calls. But it can be used as a operator, in executable statements,to combine multiple expressions in one line.
+
+
+Only 4 operators have been specified clearly that they will execute from left to right. They are logical &&, logical ||, comma, conditional ?:
+For other operators ,execution order is not specified.
