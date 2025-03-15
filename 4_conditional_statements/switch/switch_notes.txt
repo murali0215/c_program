@@ -1,0 +1,64 @@
+Switch statement:
+
+switch statement is a conditional statement, which is used to handle different values of an expression. Switch is used when we have to compare an expression against different possible values and perform different tasks based on each value.
+
+switch(<exp>)
+{ // {} not optional
+case lb1: //statements related to case lb1
+break ; // stop execution of a case with break
+case lb2 : // stments related to case lb2
+.
+.
+.
+default: // default case , when no other cases are matching
+}
+
+- The switch expression is an integral expression. It cannot be a float or double or long double. The result of the expression should be an integer value only.
+eg., switch(x * (15/10))
+- switch expression value is compared for equality with different cases provided inside switch statement.
+- Case labels must be constants or constant expressions. Cannot be variables or variable expressions.
+eg., 3 , 3+4 , 3.14 * 2 * 5 (Not allowed: a + 3 , a)
+
+- Case labels must be integral. they cannot be real numbers.
+eg., case 1 , case 'a' , case 1000 , case 0  , case -5
+invalid eg: case 1.5 , case 2 * 1.5
+
+- Case labels must be unique.
+eg., 2 * 2 , 2+ 2 are not valid case labels, as they both result same value.
+
+- switch statement execution starts from a case , wherever the expression value matches with the case label and continues till end of switch statement or a break statement.
+
+- break statement is a optional statement, used to stop the control from falling down to other cases after execution of one case.
+eg.,
+switch(ch)
+{
+case 1: //stmts related to case 1
+break; // go out of switch, dont execute case 2 if case 1 executed
+case 2: // stmts related to case 2
+case 3: // stmts related to case 3
+// case 3 also executed after case 2, because case 2 does not have break
+}
+
+- default case: optional case. It will reach only after all cases are checked.
+Default case can be written anywhere in the switch statement, not necessarily at the end. default execution will start only if none of the other cases are matching. Once execution starts, default also behaves like other cases. If the break is not there, it will also continue to other cases.
+For the last case ,no need for a break statement, as that is the end of the statement.
+switch cases can be empty also.This feature is useful when you have to do the same work for multiple cases. you can write the instructions only once, instead of copy paste. But the last case should never be left empty.
+switch(<exp>)
+{
+case 'a'://int a; variable declarations not allowed
+case 'e':
+{
+int za;
+}
+case 'U': printf("Vowel");
+break;
+default: // last case should not be empty
+}
+
+switch cases do not allow variable declarations.
+switch expression does not work like if condition. if condition is used to make a decision, based on its boolean value.
+switch expression value is not converted to boolean. Its value is compared with case labels directly.
+
+int a =10;
+if(a) // a is true
+switch(a > 10) // case 1 , case 0 only possible for relational
