@@ -1,0 +1,95 @@
+Loop control statements:
+
+Whenever we need to solve any problem that requires repeated operations of the same kind, then instead of writing the same code multiple times, we will use loop statements.
+Loop statements are meant to repeat the execution of a block of code, until a certain false condition is met.
+there are 3 types of loops:
+
+1)while loop:
+syntax : while(<cond>)
+{
+//Block of code / loop body
+}
+<cond> : Is an expression that makes a decision based on its boolean value. If the condition is true, then the loop body is executed. Otherwise the loop is quit. However, once the loop body is executed, the condition is repeated and the process goes on until the condition becomes false at some point.
+So we have to write the condition such that the condition becomes true multiple times, so that the loop body is executed multiple times. And we need to also include code with in the body,that will make the condition false, after required number of executions.
+<cond> cannot be empty in while().
+
+2) for loop:
+syntax: for(<init> ; <cond> ; <incdec>)
+{
+//loop body
+}
+<init> : Initialization section contains expressions that will run only once, before checking the loop condition, first time.
+Initialization section can be left empty, if you do the required part before for loop. But semicolon is mandatory for seperation.
+Initialization section can also contain multiple expressions, seperated by commas, if you want to do multiple initializations.
+we can also write, executable statements like printf or scanf in this section, that work like expressions.
+<cond> : Condition section should have the expression, that is going to decide if the loop body is executed or not.
+Condition is checked everytime before entering the loop body.Only if condition value is true, it will enter the body, if it is false, the for loop is terminated, and control will flow to next statements.
+condition can be left empty between the semicolons. If condition is empty, it is considered as a true condition and the loop will become an infinite loop.
+condition can have multiple conditional expressions, combined with logical operators, like && and ||. They should not be combined with comma (,) operator.
+
+Loop body: Loop body is executed whenever <cond> is true.
+Loop body can contain multiple statements ,enclosed in {,} or only one statement or just a null statement (;).
+eg., for(i=0;i<100;printf("%d",i),i++); // this is a valid for loop
+//prints 0 to 99 numbers
+<incdec> : Any modifications required to change the condition value ,to make it false or slowly go near to false, are written in this section.
+This section can be left empty, if you write the modifications with in loop body.
+It can also have multiple modifications, seperated by commas.
+Any expressions can be written in this section. But modifications make more sense here.
+Modification need not be only increment or decrement. It can be any kind of modification, that can lead to termination of the loop.
+All three sections of for loop, <init>,<cond>&& <incdec> can be left empty ,if you are able to manage the code some other way. However, the 2 semicolons are mandatory with in the for loop () parenthesis.
+variable Declarations are not allowed in for loop ,any of the sections. Loop body can have declarations.
+
+3) do while loop:
+
+syntax : 
+do
+{
+//loop body
+}
+while(<cond>);
+do while loop enters the body of the loop execution, without any conditional check, first time.
+For the second time it will check the condition, at the end of the loop, and if the condition is true, then it will repeat execution of the block, otherwise it will exit the loop and flow to the next statements.
+loop body can be a block of statements enclosed in {}, or a single statement without any {,}.
+eg., 
+do
+       printf("Hello");
+while(++i<=10);
+eg., 
+do
+{
+      printf("Hello");
+       i++;
+}
+while(i<=10);
+do while loop executes the body of the loop, minimum once, even if the condition is false, as it checks condition after execution of body.
+
+while , for and do while loops can be made to work similar to each other and give the same output, by adding some extra code. Otherwise except for the flow of execution, all three loops are the same, and can be used for any purpose.
+
+
+Jump Instructions:
+
+1) break statement: Works only inside a switch statement or a loop.
+break statement takes the control to outside of a switch statement or a loop, breaking the execution of that statement. Execution will continue after the switch or loop.
+break can be used just like that, without any condition, but in a loop its not useful directly. So better to accompany it with a if statement.
+break can take the control out of only one loop or one switch statement.
+break statement will not wait for the statements after it to execute, it will skip all of them.
+In a for loop, if break is written, inc/dec section will not execute.
+break statement will not break the outer loops in a nested statement, it will only break the statement to which it belongs.
+
+2) continue statement: works only inside a loop.
+continue skips all statements after it, and jumps back to the loop condition in while and do while loops. In for loop, it will jump back to inc/dec section.
+continue will also work for only one loop. The outer loops will work as they are.
+
+3)goto statement:
+a label in a program is an identifier that is used to mark some statements as jumping points in a program.
+If only labels are there in a program, they are not going to make any difference to the program output.
+Lables are effective only if goto statements are used.
+
+goto statement is used to jump from one point in a function to another within same function. Inorder to mention the destination to jump, we use labels.
+
+eg., goto LBL; // this will take control to the point where LBL is mentioned, and execution will continue from that point.
+goto can take control to go forward or backward. Backward jumps work like a loop.
+goto statement however is not recommended for creation of loops or jumping as already functionality is provided in terms of loop statements and functions.
+real time usage of goto statement is, to jump out of a nested loop/nested switch, when some condition is met, which is not possible with break statement.
+a label if used, should not be left empty. Minimum one statement must be there after the label. Labels within one function should be unique.
+
