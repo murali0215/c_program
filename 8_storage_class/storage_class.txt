@@ -1,0 +1,344 @@
+--->In addition of data types, each variable has one more attribute known as storage class.
+    storage class makes our program efficient and fast.
+
+
+        general syntax:- storage_class datatype variable_name
+
+
+--->There are four types of storage classes
+  ->Automatic (auto)
+  ->External (extern)
+  ->Static (static)
+  ->Register(register)
+
+-> example declartion:-
+   auto int x,y;
+   static float d;
+   register int z;
+   extern int x;
+
+-> when the storage class not specified at the time of decleration, compiler assumes default storage class based on the plase of decleration
+
+-> storage class desides about these four aspects of variable:-
+   -> Lifetime - time between the creation and destruction of a variable.
+   -> scope - Location where the variable is available for use.
+   -> intitial value - Default value taken by an uninitiolized variable.
+   -> place of storage - place in memeory where the storage is allocated for the variable (static memory, runtime, stack or registor).
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+---> Automatic
+
+        -> all the variables declared inside a block/function without any storage class specifier are automatic variables.
+
+        1)Keyword - auto
+        2)use in - local
+        3)place of storage- stack.
+        4)Default value - Garbage value.
+        5)scope - inside the funtion or block in which they are declared.
+	6)life time - released automatically when the function/block terminates.
+
+	example:-
+	#include<stdio.h>
+	int main()
+	{
+		auto int a=5,b=89;
+		printf("a:%d b:%d",a,b);
+	}
+
+	Another type of decleration:-
+	#include<stdio.h>
+	int main()
+	{
+		int a=5,b=89; //here auto will be declared automatically by the compiler
+		printf("a:%d b:%d",a,b);
+	}
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+---> Extern
+	
+	->The variables that have to be used by any funtions and in different files can be diclared as as external variables
+ 	
+	1)Keyword - extern
+	2)use in - global
+	3)place of storage - data 
+	4)default value - 0
+	5)scope - Entire program of global scope
+	6)Life time - End of the Program
+
+ 	definition of an external variable -> int x = 20;
+	decleration of an external variable -> extern int x;	
+
+#include<stdio.h>
+/*int x;
+int fun();
+int main()
+{
+printf("%d\n",x);
+fun();
+fun();
+printf("%d\n",x);
+}
+int fun()
+{
+x++;
+}
+*/
+/* output:-
+0
+2
+*/
+
+/*
+extern int x =0; //throws warning
+int fun();
+int main()
+{
+printf("%d\n",x);
+fun();
+fun();
+printf("%d\n",x);
+}
+int fun()
+{
+x++;
+}*/
+/* 
+output:-
+warning: ‘x’ initialized and declared ‘extern’
+extern int x =0;
+*/
+/*
+extern int x; // x is declared
+int fun();
+int main()
+{
+printf("%d\n",x);
+fun();
+fun();
+printf("%d\n",x);
+}
+int x = 20; // x is defined and x value is 20 
+int fun()
+{
+x++;
+}
+*/
+/* output
+20
+22
+*/
+
+/*
+int x = 25;
+int fun();
+int main()
+{
+printf("%d\n",x);
+fun();
+fun();
+printf("%d\n",x);
+}
+int x = 10; // we cant re asign value at global  
+int fun()
+{
+x++;
+}
+*/
+/* output :-
+exp_extern.c:72:5: error: redefinition of ‘x’
+ int x = 10; // we cant asign value at global
+     ^
+exp_extern.c:63:5: note: previous definition of ‘x’ was here
+ int x = 25;
+*/
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+---->Static
+
+	1)Keyword - static
+	2)use in - global and local
+	3)place of storage - data
+	4)default value- 0 
+	5)scope - with in the file scope or for local staic variable it will be be with the function or block
+	6)life time - End of the program
+
+	-> static can be used local static variable or global static variable 
+
+example program:-
+ 
+#include <stdio.h>
+static int k ;
+int fun();
+int main()
+{
+        {
+                static int k=20;
+                printf("in main static block:%d\n",k);
+        }
+        printf("befor fun call:%d\n",k);
+        k=10;
+        fun();
+        printf("after fun call:%d\n",k);
+    return 0;
+}
+int fun()
+{
+        printf("in fun:%d\n",k);
+        k=55;
+}
+/* output:-
+in main static block:20
+befor fun call:0
+in fun:10
+after fun call:55
+*/
+                                                            
+
+/*
+#include <stdio.h>
+static int k ;
+int fun();
+int main()
+{
+        {
+                static int k=20;
+                printf("in main static block:%d\n",k);
+        }
+        printf("befor fun call:%d\n",k);
+        k=10;
+        fun();
+        printf("after fun call:%d\n",k);
+    return 0;
+}
+int fun()
+{
+        printf("in fun:%d\n",k);
+        k=55;
+}
+*/
+/* output:-
+in main static block:20
+befor fun call:0
+in fun:10
+after fun call:55
+*/
+
+#include <stdio.h>
+static int k =10;
+int fun();
+int main()
+{
+ printf("main:%d\n",k);
+fun();// this fun() is at exp_2_static.c
+}
+/* output:-
+main:10
+fun :0                                                       
+*/
+                                                             
+//exp_2_static.c
+#include<stdio.h>
+int k;//here new extern global is declared not static value got
+int fun()
+{
+printf("fun :%d",k);
+
+}
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----> Register
+	
+	->Register class can be  applied only to automatic variables
+	->variables stored in the register can be accessed much faster than the variables stored in memory
+	->register variables don't have memory address so we can't apply address operator(&) to them  	
+	->if many variables are declared as register and CPU registor are not available then the compiler will treat them as automatic variables
+	->we can specify register storage class only for int, char or pointer types other than this the compiler will treat as automatic variables
+
+	1)Keyword - registor
+	2)use in - function / block
+	3)place of storage - CPU registor
+	4)scope - function / block
+	5)default value - Garbage
+	6)life Time - function / Block
+
+	example program:-
+
+/*
+#include<stdio.h>
+int main(void)
+{
+register int i;
+for(i=0; i<20; i++)
+{
+printf("%d\n",i);
+}
+return 0;
+}
+*/
+/* output:-
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+*/
+
+/*
+#include<stdio.h>
+int main(void)
+{
+register float i=10.9; //register variable only support int, char or pointer type so here treat as auto 
+printf("%f",i);
+return 0;
+}*/
+/* output:10.900000*/
+
+#include<stdio.h>
+int main(void)
+{
+register int i;
+scanf("%d",&i); // throw error because registor has no address
+return 0;
+}
+/* output;-
+exp_rigister.c: In function ‘main’:
+exp_rigister.c:52:1: error: address of register variable ‘i’ requested
+ scanf("%d",&i); // throw error because registor has no address
+ ^~~~~
+*/
+
